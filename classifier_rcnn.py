@@ -57,8 +57,8 @@ class TextClassifier():
 
     def model(self, embeddings_matrix, maxlen, word_index, num_class):
         inp = Input(shape=(maxlen,))
-        encode = Bidirectional(GRU(1, return_sequences=True))
-        encode2 = Bidirectional(GRU(1, return_sequences=True))
+        encode = Bidirectional(CuDNNGRU(128, return_sequences=True))
+        encode2 = Bidirectional(CuDNNGRU(129, return_sequences=True))
         attention = Attention(maxlen)
         x_4 = Embedding(len(word_index) + 1,
                         embeddings_matrix.shape[1],
